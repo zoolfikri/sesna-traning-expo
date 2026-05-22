@@ -26,6 +26,7 @@ export default function UsersScreen({ navigation }: Props) {
 
   return (
     <View style={styles.container}>
+
       <TouchableOpacity style={styles.backBtn} onPress={() => navigation.goBack()}>
         <Text style={styles.backText}>← Kembali</Text>
       </TouchableOpacity>
