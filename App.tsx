@@ -11,16 +11,22 @@ import LoginScreen from "./screens/LoginScreen";
 import NewsDetailScreen from "./screens/NewsDetailScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import UsersScreen from "./screens/UsersScreen";
+import { useAuthStore } from "./store/authStore";
 import type { RootStackParamList } from "./types/navigation";
 
 const queryClient = new QueryClient();
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
+	const token = useAuthStore((state) => state.token);
+
 	return (
 		<QueryClientProvider client={queryClient}>
 			<NavigationContainer>
-				<Stack.Navigator screenOptions={{ headerShown: false }}>
+				<Stack.Navigator
+					screenOptions={{ headerShown: false }}
+					initialRouteName={token ? 'AppHome' : 'Login'}
+				>
 					<Stack.Screen name="Login" component={LoginScreen} />
 					<Stack.Screen name="AppHome" component={AppHomeScreen} />
 					<Stack.Screen name="Home" component={FlatListScreen} />

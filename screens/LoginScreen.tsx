@@ -5,6 +5,9 @@ import { Controller, useForm } from "react-hook-form";
 import {
 	ActivityIndicator,
 	Alert,
+	KeyboardAvoidingView,
+	Platform,
+	ScrollView,
 	StyleSheet,
 	Text,
 	TextInput,
@@ -52,7 +55,14 @@ export default function LoginScreen({ navigation }: Props) {
 	}
 
 	return (
-		<View style={styles.container}>
+		<KeyboardAvoidingView
+			style={{ flex: 1 }}
+			behavior={Platform.OS === "ios" ? "padding" : "height"}
+		>
+			<ScrollView
+				contentContainerStyle={styles.container}
+				keyboardShouldPersistTaps="handled"
+			>
 			<Text style={styles.title}>Sesna</Text>
 			<Text style={styles.subtitle}>Masuk ke akun kamu</Text>
 
@@ -108,13 +118,14 @@ export default function LoginScreen({ navigation }: Props) {
 					<Text style={styles.btnText}>Masuk</Text>
 				)}
 			</TouchableOpacity>
-		</View>
+			</ScrollView>
+		</KeyboardAvoidingView>
 	);
 }
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
+		flexGrow: 1,
 		backgroundColor: "#fff",
 		paddingHorizontal: 24,
 		justifyContent: "center",
